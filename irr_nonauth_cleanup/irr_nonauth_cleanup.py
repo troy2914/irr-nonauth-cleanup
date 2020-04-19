@@ -126,9 +126,9 @@ def main():
         prefix, origin = (None, None)
         for line in irr_object:
             if line.startswith("route:") or line.startswith("route6:"):
-                prefix = line.split()[1]
+                prefix = line.split(':', 1)[1].strip()
             if line.startswith("origin:"):
-                origin = int(line.split()[1][2:])
+                origin = int(line.split(':', 1)[1].strip()[2:])
         if prefix and origin:
             if args.prefix:
                 if ip_network(args.prefix).overlaps(ip_network(prefix)):
